@@ -1,12 +1,12 @@
 import { page } from "@vitest/browser/context";
 import { beforeEach, describe, expect, it } from "vitest";
 
-import "../src/my-element.js";
+import "./element";
 
 describe("Button with increment", async () => {
   beforeEach(() => {
     document.body.innerHTML =
-      '<my-element count="10" docs-hint="Updated Docs"></my-element>';
+      '<my-element count="10" docs-hint="Updated Docs"><h1>hello there</h1></my-element>';
   });
 
   it("should increment the count on each click", async () => {
