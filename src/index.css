@@ -1,38 +1,37 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@layer reset, palette, theme, global, compositions, layout, components, overrides;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+@import "./styles/reset.css" layer(reset);
+@import "./styles/tokens.css" layer(theme);
+@import "./styles/typography.css" layer(theme);
+@import "./styles/palette.css" layer(palette);
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@layer theme {
+  :root {
+    color-scheme: light;
+    accent-color: var(--accent);
+    color: var(--text);
+
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 }
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: var(--accent);
   text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+
+  &:hover {
+    color: var(--primary);
+  }
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
+  display: grid;
+  place-content: center;
+  width: clamp(320px, 100%, 120ch);
   min-height: 100vh;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
 }

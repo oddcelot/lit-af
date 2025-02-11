@@ -1,0 +1,55 @@
+@property --gradient-start {
+  syntax: "<color> | <custom-ident>";
+  initial-value: #00b5ad;
+  inherits: true;
+}
+
+@property --gradient-end {
+  syntax: "<color> | <custom-ident>";
+  initial-value: #2185d0;
+  inherits: true;
+}
+
+@layer general {
+  :root {
+    --brand-green: #00b5ad;
+    --brand-blue: #2185d0;
+
+    --raspberry: #ff5264;
+    --sunny-yellow: #efd830;
+    --ocean-blue: #435e72;
+
+    --white: #fff;
+    --black: #000;
+    --cold-black: #010101;
+    --gray: #4d4d4d;
+  }
+}
+
+@layer gradients {
+  :root {
+    --gradient-start: var(--brand-green);
+    --gradient-end: var(--brand-blue);
+
+    --gradient-brand: linear-gradient(
+      in lab 60deg,
+      var(--gradient-start),
+      var(--gradient-end)
+    );
+  }
+}
+
+@layer functional {
+  :root {
+    --primary: var(--brand-green);
+    --accent: var(--brand-blue);
+
+    --surface-document: var(--white);
+    --surface-1: color-mix(var(--white), black 10%);
+
+    --text: var(--black);
+
+    --error: var(--raspberry);
+    --warning: var(--sunny-yellow);
+  }
+}

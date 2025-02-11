@@ -1,5 +1,6 @@
 import type { Preview } from "@storybook/web-components";
 import "@fontsource-variable/nunito";
+import "../src/index.css";
 
 const preview: Preview = {
   parameters: {
@@ -10,7 +11,6 @@ const preview: Preview = {
       },
     },
   },
-  // use this to attatch anything to the preview
 };
 
 export default preview;
