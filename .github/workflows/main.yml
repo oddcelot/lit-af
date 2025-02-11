@@ -36,6 +36,11 @@ jobs:
         env:
           BASE_PATH: /lit-af/
 
+      - name: Build Storybook
+        run: pnpm storybook:build
+        env:
+          BASE_PATH: /lit-af/
+
       - name: Create .nojekyll
         run: touch dist/.nojekyll
 
@@ -43,4 +48,4 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4.5.0
         with:
           branch: gh-pages
-          folder: dist
+          folder: storybook-static
