@@ -19,7 +19,7 @@
     "test:ui": "vitest --ui",
     "analyze": "cem analyze --litelement --format vscode --globs \"src/**/*.ts\"",
     "analyze:watch": "cem analyze --litelement --globs \"src/**/*.ts\" --watch",
-    "generate:ce-vscode": "web-component-analyzer-webtypes  analyze \"src/**/*.ts\" --format vscode --outFile custom-elements.html-data.json",
+    "generate:ce-vscode": "web-component-analyzer-webtypes  analyze \"src/**/*.component.ts\" --format vscode --outFile custom-elements.html-data.json",
     "storybook": "storybook dev -p 6006 --disable-telemetry --no-open",
     "storybook:build": "storybook build --disable-telemetry"
   },
