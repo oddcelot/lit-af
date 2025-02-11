@@ -1,7 +1,13 @@
 {
-  "name": "vite-lit-ts-starter",
-  "private": true,
-  "version": "0.0.0",
+  "name": "lit-af",
+  "private": false,
+  "license": "GPL-3.0-only",
+  "version": "0.1.0",
+  "author": {
+    "name": "Stefan Kopco",
+    "email": "hey@oddcelot.dev",
+    "url": "https://github.com/oddcelot"
+  },
   "type": "module",
   "scripts": {
     "dev": "vite",
