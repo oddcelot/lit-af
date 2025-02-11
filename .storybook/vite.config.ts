@@ -4,5 +4,6 @@ export default defineConfig(({ mode }) => {
   return {
     base: env.BASE_PATH,
     assetsInclude: ["/sb-preview/runtime.js"],
+    optimizeDeps: { exclude: ["/node_modules/.cache/storybook"] },
   };
 });
