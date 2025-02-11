@@ -1,0 +1,18 @@
+<style>
+  .docs-story {
+    :has([scale]) {
+      overflow: hidden;
+    }
+
+    [scale] {
+      place-content: center;
+      transform-origin: center;
+    }
+  }
+
+  #storybook-root,
+  .sb-story > [data-name] {
+    display: grid;
+    gap: 1rem;
+  }
+</style>
