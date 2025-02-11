@@ -14,7 +14,7 @@ export class MyElement extends LitElement {
   /**
    * Copy for the read the docs hint.
    */
-  @property()
+  @property({ attribute: "docs-hint" })
   docsHint = "Click on the Vite and Lit logos to learn more";
 
   /**

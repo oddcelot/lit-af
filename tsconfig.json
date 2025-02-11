@@ -9,10 +9,13 @@
     "moduleDetection": "force",
     "isolatedModules": true,
     "verbatimModuleSyntax": true,
+    "types": ["@vitest/browser/providers/playwright"],
+
     /* Strictness */
     "strict": true,
     "noUncheckedIndexedAccess": true,
     "noImplicitOverride": true,
+
     /* Node Stuff */
     "allowImportingTsExtensions": true,
     "module": "ES2022",
@@ -30,6 +33,6 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
-  },
-  "include": ["src"]
+  }
+  // "include": ["src"]
 }
