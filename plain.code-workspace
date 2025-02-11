@@ -1,0 +1,28 @@
+{
+  "folders": [
+    {
+      "name": "components",
+      "path": "./src"
+    },
+    {
+      "name": "root",
+      "path": "."
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "**/.vscode": true,
+      "**/.git": true,
+      "**/.github": true,
+      "**/node_modules": true,
+      "**/dist": true,
+      "**/storybook-static": true,
+      "**/pnpm-lock.yaml": true,
+      "**/.prototools": true,
+      "**/.gitignore": true,
+      "**/custom-elements.html-data.json": true,
+      "**/*.d.ts": true,
+      "**/src": true
+    }
+  }
+}
