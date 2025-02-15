@@ -1,4 +1,3 @@
-// import { LitElement, css, html } from "lit";
 import { LitElement, html } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import litLogo from "../assets/lit.svg";
@@ -25,14 +24,11 @@ export class MyElement extends LitElement {
   /**
    * The number of times the button has been clicked.
    */
-  @property({ type: Number })
+  @property({ attribute: false })
   count = 0;
 
   override render() {
     return html`
-      <!-- <style>
-        ${componentStyles}
-      </style> -->
       <div>
         <a href="https://vite.dev" target="_blank">
           <img src=${viteLogo} class="logo" alt="Vite logo" />
@@ -55,14 +51,5 @@ export class MyElement extends LitElement {
     this.count++;
   }
 
-  static override readonly styles = sheet;
-
-  // static override readonly styles = css`
-  //   :host {
-  //     display: block;
-  //     padding: 1rem;
-  //     background: var(--my-element-text-color, black);
-  //   }
-  //   ${componentStyles}
-  // `;
+  static override readonly styles = [sheet];
 }

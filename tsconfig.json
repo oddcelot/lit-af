@@ -3,24 +3,27 @@
     /* Base Options */
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "target": "ES2022",
+    "target": "ESNext",
     "allowJs": true,
     "resolveJsonModule": true,
     "moduleDetection": "force",
     "isolatedModules": true,
     "verbatimModuleSyntax": true,
-    "types": ["@vitest/browser/providers/playwright"],
 
     /* Strictness */
     "strict": true,
     "noUncheckedIndexedAccess": true,
     "noImplicitOverride": true,
 
+    /* Type Checking */
+    "types": ["@vitest/browser/providers/playwright"],
+
     /* Node Stuff */
     "allowImportingTsExtensions": true,
-    "module": "ES2022",
+    "rewriteRelativeImportExtensions": true,
+    "module": "ESNext",
     "noEmit": true,
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
 
     /* Lit */
     "experimentalDecorators": true,
@@ -33,5 +36,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
-  }
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["src/**/*.stories.ts"]
 }

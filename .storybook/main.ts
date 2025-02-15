@@ -9,6 +9,9 @@ const config: StorybookConfig = {
     "@storybook/addon-interactions",
     "@storybook/addon-a11y",
   ],
+  docs: {
+    defaultName: "Docs",
+  },
   framework: {
     name: "@storybook/web-components-vite",
     options: {
