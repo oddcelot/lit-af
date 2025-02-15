@@ -2,6 +2,7 @@ import { globSync } from "node:fs";
 import { extname, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { defineConfig, loadEnv } from "vite";
+import dts from "vite-plugin-dts";
 
 const version = process.env.npm_package_version;
 
@@ -19,13 +20,18 @@ export default defineConfig(({ mode }) => {
       },
     },
     build: {
+      cssCodeSplit: true,
       lib: {
         entry: {
-          main: resolve(__dirname, "./src/main.ts"),
+          // main: resolve(__dirname, "./src/main.ts"),
+          my_element: resolve(
+            __dirname,
+            "./src/elements/element/element.component.ts"
+          ),
         },
         formats: ["es"],
-        // name: "my-ui",
-        // fileName: (format) => `index.${format}.js`,
+        name: "my-ui",
+        fileName: (format) => `index.${format}.js`,
       },
       rollupOptions: {
         // If we want to publish standalone components we don't externalize lit,
@@ -35,17 +41,12 @@ export default defineConfig(({ mode }) => {
       },
 
       input: Object.fromEntries(
-        globSync(
-          [
-            "src/**/*.ts",
-            "!src/**/*.stories.ts",
-            "src/main.ts",
-            "src/styles/*.css",
-          ],
-          {
-            exclude: (fileName) => fileName.includes("stories"),
-          }
-        ).map((file) => {
+        globSync(["src/elements/**/*.ts", "src/styles/*.css"], {
+          exclude: (fileName) => {
+            return fileName.includes("stories") || fileName.includes("test");
+          },
+        }).map((file) => {
+          console.log(file);
           // This remove `src/` as well as the file extension from each
           // file, so e.g. src/nested/foo.js becomes nested/foo
           const entryName = relative(
@@ -54,6 +55,7 @@ export default defineConfig(({ mode }) => {
           );
           /** expanded relative paths to absolute paths */
           const entryUrl = fileURLToPath(new URL(file, import.meta.url));
+          console.log([entryName, entryUrl]);
           return [entryName, entryUrl];
         })
       ),
@@ -63,11 +65,13 @@ export default defineConfig(({ mode }) => {
         entryFileNames: "[name].js",
 
         assetFileNames: ({ originalFileNames }) => {
+          console.log(originalFileNames);
           const filePath = originalFileNames[0];
+          console.log(filePath);
 
           /** put component css next to its js */
-          if (filePath?.includes("/components/")) {
-            return "components/[name]/[name][extname]";
+          if (filePath?.includes("/elements/")) {
+            return "elements/[name]/[name][extname]";
           }
           /** move all other styles here */
           if (filePath?.includes("/styles/")) {
@@ -77,6 +81,15 @@ export default defineConfig(({ mode }) => {
           return "assets/[name][extname]";
         },
       },
+      sourcemap: true,
+      emptyOutDir: true,
     },
+    plugins: [
+      dts({
+        rollupTypes: true,
+        tsconfigPath: "./tsconfig.json",
+        exclude: ["**/*.stories.ts", "src/test", "**/*.test.ts"],
+      }),
+    ],
   };
 });
