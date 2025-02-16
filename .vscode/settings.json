@@ -1,3 +1,4 @@
 {
-  "html.customData": ["./custom-elements.html-data.json"]
+  "html.customData": ["./custom-elements.html-data.json"],
+  "eslint.experimental.useFlatConfig": true
 }

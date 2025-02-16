@@ -3,12 +3,18 @@ import { extname, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { defineConfig, loadEnv } from "vite";
 import dts from "vite-plugin-dts";
+import eslint from "vite-plugin-eslint";
 
 const version = process.env.npm_package_version;
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
   return {
+    resolve: {
+      alias: {
+        "@": resolve(__dirname, "./src"),
+      },
+    },
     base: env.BASE_PATH,
     test: {
       // Lit recommends using browser environment for testing
@@ -23,11 +29,7 @@ export default defineConfig(({ mode }) => {
       cssCodeSplit: true,
       lib: {
         entry: {
-          // main: resolve(__dirname, "./src/main.ts"),
-          my_element: resolve(
-            __dirname,
-            "./src/elements/element/element.component.ts"
-          ),
+          main: resolve(__dirname, "./src/main.ts"),
         },
         formats: ["es"],
         name: "my-ui",
@@ -38,53 +40,56 @@ export default defineConfig(({ mode }) => {
         // if you are going to use lit in your own project, you can make it a dep instead.
         // @ref: https://leonradley.com/articles/web-components/2022-02-vite-lit-storybook
         external: /^lit/,
-      },
+        input: Object.fromEntries(
+          globSync(
+            ["src/elements/**/*.ts", "src/main.ts", "src/styles/*.css"],
+            {
+              exclude: (fileName) => {
+                return (
+                  fileName.includes("stories") || fileName.includes("test")
+                );
+              },
+            }
+          ).map((file) => {
+            // This remove `src/` as well as the file extension from each
+            // file, so e.g. src/nested/foo.js becomes nested/foo
+            const entryName = relative(
+              "src",
+              file.slice(0, file.length - extname(file).length)
+            );
+            /** expanded relative paths to absolute paths */
+            const entryUrl = fileURLToPath(new URL(file, import.meta.url));
+            return [entryName, entryUrl];
+          })
+        ),
+        output: {
+          banner: `/*! my UI v${version} */`,
+          entryFileNames: "[name].js",
+          assetFileNames: ({ originalFileNames }) => {
+            const filePath = originalFileNames[0];
 
-      input: Object.fromEntries(
-        globSync(["src/elements/**/*.ts", "src/styles/*.css"], {
-          exclude: (fileName) => {
-            return fileName.includes("stories") || fileName.includes("test");
+            /** put component css next to its js */
+            if (filePath?.includes("/elements/")) {
+              return "elements/[name]/[name][extname]";
+            }
+
+            /** move all other styles here */
+            if (filePath?.includes("/styles/")) {
+              return "[name][extname]";
+            }
+
+            /** move all other assets to the default location */
+            return "assets/[name][extname]";
           },
-        }).map((file) => {
-          console.log(file);
-          // This remove `src/` as well as the file extension from each
-          // file, so e.g. src/nested/foo.js becomes nested/foo
-          const entryName = relative(
-            "src",
-            file.slice(0, file.length - extname(file).length)
-          );
-          /** expanded relative paths to absolute paths */
-          const entryUrl = fileURLToPath(new URL(file, import.meta.url));
-          console.log([entryName, entryUrl]);
-          return [entryName, entryUrl];
-        })
-      ),
-
-      output: {
-        banner: `/*! my UI v${version} */`,
-        entryFileNames: "[name].js",
-
-        assetFileNames: ({ originalFileNames }) => {
-          console.log(originalFileNames);
-          const filePath = originalFileNames[0];
-          console.log(filePath);
-
-          /** put component css next to its js */
-          if (filePath?.includes("/elements/")) {
-            return "elements/[name]/[name][extname]";
-          }
-          /** move all other styles here */
-          if (filePath?.includes("/styles/")) {
-            return "[name][extname]";
-          }
-          /** move all other assets to the default location */
-          return "assets/[name][extname]";
         },
       },
+
       sourcemap: true,
       emptyOutDir: true,
     },
+
     plugins: [
+      eslint(),
       dts({
         rollupTypes: true,
         tsconfigPath: "./tsconfig.json",
