@@ -12,6 +12,8 @@ export default defineConfig(({ mode }) => {
   return {
     resolve: {
       alias: {
+        "@root": resolve(__dirname, "./"),
+        "@modules": resolve(__dirname, "./node_modules"),
         "@": resolve(__dirname, "./src"),
       },
     },
@@ -27,6 +29,7 @@ export default defineConfig(({ mode }) => {
     },
     build: {
       cssCodeSplit: true,
+      cssMinify: "lightningcss",
       lib: {
         entry: {
           main: resolve(__dirname, "./src/main.ts"),
@@ -64,6 +67,7 @@ export default defineConfig(({ mode }) => {
         ),
         output: {
           banner: `/*! my UI v${version} */`,
+          format: "commonjs",
           entryFileNames: "[name].js",
           assetFileNames: ({ originalFileNames }) => {
             const filePath = originalFileNames[0];

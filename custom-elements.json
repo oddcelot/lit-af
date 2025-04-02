@@ -4,7 +4,223 @@
   "modules": [
     {
       "kind": "javascript-module",
-      "path": "src/element/element.component.ts",
+      "path": "src/main.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "package": "\"./elements/element/element\""
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/styles/shared.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "externalImportStyleElement",
+          "default": "html` <style> ${styleImport} </style>`"
+        },
+        {
+          "kind": "variable",
+          "name": "shared",
+          "default": "new CSSStyleSheet()"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "externalImportStyleElement",
+          "declaration": {
+            "name": "externalImportStyleElement",
+            "module": "src/styles/shared.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "shared",
+          "declaration": {
+            "name": "shared",
+            "module": "src/styles/shared.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/elements/button/button.stories.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "meta",
+          "type": {
+            "text": "Meta"
+          },
+          "default": "{ component: \"my-element\", // component: MyElement, tags: [\"autodocs\"], argTypes: { \"docs-hint\": { description: \"test\" } }, render: (args, ctx) => { console.log({ args, ctx }); console.log([...MyElement.elementProperties]); return html`<my-element .count=${args.count}><h1>welcome</h1></my-element>`; }, }"
+        },
+        {
+          "kind": "variable",
+          "name": "Default",
+          "type": {
+            "text": "StoryObj"
+          },
+          "default": "{ name: \"Default\", args: { count: 0, }, }"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "meta",
+            "module": "src/elements/button/button.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Default",
+          "declaration": {
+            "name": "Default",
+            "module": "src/elements/button/button.stories.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/elements/button/button.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "An example element.",
+          "name": "MyButton",
+          "cssParts": [
+            {
+              "description": "The button",
+              "name": "button"
+            }
+          ],
+          "slots": [
+            {
+              "description": "This element has a slot",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "docsHint",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"Click on the Vite and Lit logos to learn more\"",
+              "description": "Copy for the read the docs hint.",
+              "attribute": "docs-hint"
+            },
+            {
+              "kind": "field",
+              "name": "count",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "The number of times the button has been clicked."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "docs-hint",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"Click on the Vite and Lit logos to learn more\"",
+              "description": "Copy for the read the docs hint.",
+              "fieldName": "docsHint"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "my-button",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "MyButton",
+          "declaration": {
+            "name": "MyButton",
+            "module": "src/elements/button/button.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "my-button",
+          "declaration": {
+            "name": "MyButton",
+            "module": "src/elements/button/button.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "MyButton",
+            "module": "src/elements/button/button.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/elements/element/element.stories.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "meta",
+          "type": {
+            "text": "Meta"
+          },
+          "default": "{ component: \"my-element\", // component: MyElement, tags: [\"autodocs\"], argTypes: { \"docs-hint\": { description: \"test\" } }, render: (args, ctx) => { console.log({ args, ctx }); console.log([...MyElement.elementProperties]); return html`<my-element .count=${args.count}><h1>welcome</h1></my-element>`; }, }"
+        },
+        {
+          "kind": "variable",
+          "name": "Default",
+          "type": {
+            "text": "StoryObj"
+          },
+          "default": "{ name: \"Default\", args: { count: 0, }, }"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "meta",
+            "module": "src/elements/element/element.stories.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Default",
+          "declaration": {
+            "name": "Default",
+            "module": "src/elements/element/element.stories.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/elements/element/element.ts",
       "declarations": [
         {
           "kind": "class",
@@ -73,7 +289,7 @@
           "name": "MyElement",
           "declaration": {
             "name": "MyElement",
-            "module": "src/element/element.component.ts"
+            "module": "src/elements/element/element.ts"
           }
         },
         {
@@ -81,62 +297,7 @@
           "name": "my-element",
           "declaration": {
             "name": "MyElement",
-            "module": "src/element/element.component.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/element/element.stories.ts",
-      "declarations": [
-        {
-          "kind": "variable",
-          "name": "meta",
-          "type": {
-            "text": "Meta"
-          },
-          "default": "{ component: \"my-element\", // component: MyElement, tags: [\"autodocs\"], argTypes: { \"docs-hint\": { description: \"test\" } }, render: (args, ctx) => { console.log({ args, ctx }); console.log([...MyElement.elementProperties]); return html`<my-element .count=${args.count}><h1>welcome</h1></my-element>`; }, }"
-        },
-        {
-          "kind": "variable",
-          "name": "Default",
-          "type": {
-            "text": "StoryObj"
-          },
-          "default": "{ name: \"Default\", args: { count: 0, }, }"
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "default",
-          "declaration": {
-            "name": "meta",
-            "module": "src/element/element.stories.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Default",
-          "declaration": {
-            "name": "Default",
-            "module": "src/element/element.stories.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/element/element.ts",
-      "declarations": [],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "*",
-          "declaration": {
-            "name": "*",
-            "package": "\"./element.component\""
+            "module": "src/elements/element/element.ts"
           }
         },
         {
@@ -144,7 +305,7 @@
           "name": "default",
           "declaration": {
             "name": "MyElement",
-            "module": "src/element/element.ts"
+            "module": "src/elements/element/element.ts"
           }
         }
       ]

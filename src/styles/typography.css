@@ -1,4 +1,4 @@
-@import "../../node_modules/@fontsource-variable/nunito/index.css";
+/* @import "@modules/@fontsource-variable/nunito/index.css"; */
 
 :root {
   --font: "Nunito Variable", ui-rounded, "Hiragino Maru Gothic ProN", Quicksand,
@@ -8,7 +8,7 @@
 
 @layer stacks {
   :root {
-    --fs-base: clamp(0.75rem, 10.89vmin + -1.8rem, 8rem);
+    --fs-base: normal normal clamp(0.75rem, 10.89vmin + -1.8rem, 8rem) var(--font);
 
     --fs-hero-horizontal: 900 normal clamp(2.8rem, 15.89vmin + -1.8rem, 8rem) /
       1 var(--font);
