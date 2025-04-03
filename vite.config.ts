@@ -1,14 +1,17 @@
 import { globSync } from "node:fs";
+import { env, cwd } from "node:process";
 import { extname, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { defineConfig, loadEnv } from "vite";
 import dts from "vite-plugin-dts";
 import eslint from "vite-plugin-eslint";
+import browserslist from "browserslist";
+import { browserslistToTargets } from "lightningcss";
 
-const version = process.env.npm_package_version;
+const version = env.npm_package_version;
 
 export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, process.cwd(), "");
+  const env = loadEnv(mode, cwd(), "");
   return {
     resolve: {
       alias: {
@@ -25,6 +28,12 @@ export default defineConfig(({ mode }) => {
         enabled: true,
         provider: "playwright",
         instances: [{ browser: "chromium" }],
+      },
+    },
+    css: {
+      transformer: "lightningcss",
+      lightningcss: {
+        targets: browserslistToTargets(browserslist(">= 0.25%")),
       },
     },
     build: {

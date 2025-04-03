@@ -88,3 +88,13 @@ textarea:not([rows]) {
 :target {
   scroll-margin-block: 5ex;
 }
+
+
+
+.foo {
+  color: blue;
+
+  .bar {
+    color: red;
+  }
+}
