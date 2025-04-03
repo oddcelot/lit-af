@@ -7,6 +7,7 @@ import dts from "vite-plugin-dts";
 import eslint from "vite-plugin-eslint";
 import browserslist from "browserslist";
 import { browserslistToTargets } from "lightningcss";
+import UnoCSS from "unocss/vite";
 
 const version = env.npm_package_version;
 
@@ -51,7 +52,7 @@ export default defineConfig(({ mode }) => {
         // If we want to publish standalone components we don't externalize lit,
         // if you are going to use lit in your own project, you can make it a dep instead.
         // @ref: https://leonradley.com/articles/web-components/2022-02-vite-lit-storybook
-        external: /^lit/,
+        external: [/^lit/, /^virtual:uno.css/],
         input: Object.fromEntries(
           globSync(
             ["src/elements/**/*.ts", "src/main.ts", "src/styles/*.css"],
@@ -79,6 +80,7 @@ export default defineConfig(({ mode }) => {
           format: "commonjs",
           entryFileNames: "[name].js",
           assetFileNames: ({ originalFileNames }) => {
+            console.log(originalFileNames);
             const filePath = originalFileNames[0];
 
             /** put component css next to its js */
@@ -103,6 +105,7 @@ export default defineConfig(({ mode }) => {
 
     plugins: [
       eslint(),
+      UnoCSS(),
       dts({
         rollupTypes: true,
         tsconfigPath: "./tsconfig.json",

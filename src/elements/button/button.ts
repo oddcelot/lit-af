@@ -1,10 +1,13 @@
-import { LitElement, html } from "lit";
+import { LitElement, html, css } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import componentStyles from "./button.css?raw";
 import { externalImportStyleElement } from "@/styles/shared";
+import {Uno} from '../util-mixin.js'
 
 const componentStyleSheet = new CSSStyleSheet();
 componentStyleSheet.replaceSync(componentStyles);
+
+
 
 /**
  * An example element.
@@ -14,8 +17,8 @@ componentStyleSheet.replaceSync(componentStyles);
  */
 @customElement("my-button")
 export class MyButton extends LitElement {
+
   static override readonly styles = [componentStyleSheet];
-  // static override readonly styles = [shared, componentStyleSheet];
   /**
    * Copy for the read the docs hint.
    */
@@ -31,9 +34,13 @@ export class MyButton extends LitElement {
   override render() {
     return html`
       ${externalImportStyleElement}
-      <button part="base"><slot /></button>
+      <button part="base" class="m-2"><slot /></button>
     `;
   }
+
+    // protected override createRenderRoot() {
+    //   return this;
+    // }
 }
 
 export default MyButton;
@@ -42,3 +49,5 @@ declare global {
     "my-button": MyButton;
   }
 }
+
+

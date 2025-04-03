@@ -53,3 +53,8 @@
     --warning: var(--sunny-yellow);
   }
 }
+
+
+* {
+  opacity: 0.5
+}
