@@ -4,6 +4,7 @@ import litLogo from "@/assets/lit.svg";
 import viteLogo from "@/assets/vite.svg";
 import componentStyles from "./element.css?raw";
 import { externalImportStyleElement } from "@/styles/shared";
+import { Uno } from "../util-mixin";
 
 const componentStyleSheet = new CSSStyleSheet();
 componentStyleSheet.replaceSync(componentStyles);
@@ -15,8 +16,11 @@ componentStyleSheet.replaceSync(componentStyles);
  * @csspart button - The button
  */
 @customElement("my-element")
-export class MyElement extends LitElement {
-  static override readonly styles = [componentStyleSheet];
+export class MyElement extends Uno(LitElement) {
+  static override readonly styles = [
+    componentStyleSheet,
+
+  ];
   // static override readonly styles = [shared, componentStyleSheet];
   /**
    * Copy for the read the docs hint.
@@ -33,7 +37,7 @@ export class MyElement extends LitElement {
   override render() {
     return html`
       ${externalImportStyleElement}
-      <div>
+      <div class="m-2">
         <a href="https://vite.dev" target="_blank">
           <img src=${viteLogo} class="logo" alt="Vite logo" />
         </a>

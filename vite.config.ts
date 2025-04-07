@@ -105,7 +105,9 @@ export default defineConfig(({ mode }) => {
 
     plugins: [
       eslint(),
-      UnoCSS(),
+      UnoCSS({
+        mode: "shadow-dom",
+      }),
       dts({
         rollupTypes: true,
         tsconfigPath: "./tsconfig.json",

@@ -2,25 +2,31 @@
 
 import js from "@eslint/js";
 import { configs } from "eslint-plugin-lit";
+import unocss from "@unocss/eslint-config/flat";
 
 import type { Linter } from "eslint";
 
-export default [
+export const eslintConfig = [
+  unocss,
   {
     ...js.configs.recommended,
-    files: ["./src/**/*.ts"],
-  },
-  {
-    ...configs["flat/recommended"],
-    files: ["./src/**/*.ts"],
+
+
+    plugins: [unocss, "eslint-plugin-lit"],
   },
   // {
+  //   ...configs["flat/recommended"],
+  //   files: ["./src/**/*.ts"],
+  // },
+  // {
   //   name: "eslint-plugin-lit",
-  //   rules: ,
   // },
   {
     rules: {
       "no-console": "warn",
     },
+
   },
-] satisfies Linter.Config[];
+] as Linter.Config[];
+
+export default eslintConfig;

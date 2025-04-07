@@ -1,5 +1,5 @@
 /* playground-fold */
-import { LitElement, css, html } from "lit";
+import { LitElement, css } from "lit";
 
 type Constructor<T> = new (...args: any[]) => T;
 
