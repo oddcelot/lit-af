@@ -45,6 +45,6 @@
     }
   },
 
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "uno.config.ts"],
   "exclude": ["src/**/*.stories.ts"]
 }

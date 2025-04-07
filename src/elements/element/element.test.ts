@@ -3,7 +3,7 @@ import { beforeEach, describe, expect, it } from "vitest";
 
 import "./element";
 
-describe("Button with increment", async () => {
+describe("Element", async () => {
   beforeEach(() => {
     document.body.innerHTML =
       '<my-element count="10" docs-hint="Updated Docs"><h1>hello there</h1></my-element>';
